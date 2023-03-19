@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+//                                             كل قارد جديدة حنضيفها هان
+Route::prefix('cms/')->middleware('guest:admin,author')->group(function () {
+    Route::get('{guard}/login', [UserAuthController::class, 'showLogin'])->name('view.login');
+    Route::post('{guard}/login', [UserAuthController::class, 'login']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
+});
 
 Route::prefix('cms/admin/')->group(function () {
     // main page
