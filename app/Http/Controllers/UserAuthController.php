@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserAuthController extends Controller
 {
-    //عرض واجهة تسجيل الدخول
-    //get
+    // Display the login interface
+    // get
     public function showLogin($guard)
     {
         return response()->view('cms.auth.login', compact('guard'));
     }
 
-    // مسؤولة عن عملية تسجيل الدخول
+    // Responsible for the login process
     // post
     public function login(Request $request)
     {
@@ -24,7 +24,6 @@ class UserAuthController extends Controller
         ], []);
 
         // اسم متفق عليه
-
         $credentials = [
             'email' => $request->get('email'),
             'password' => $request->get('password'),
@@ -52,13 +51,12 @@ class UserAuthController extends Controller
     }
 
     //get
-    // لانه لما انفذ عمليه تسجيل الخروج راح يوجهه الى دالة تسجيل الدخول الرئيسية
+    // لانه لما يفذ عمليه تسجيل الخروج راح يوجهه الى دالة تسجيل الدخول الرئيسية
     public function logout()
     {
     }
 
-
-    //عرض واجهة تغير كلمة المرور
+    //Display the password change interface
     public function changePassword()
     {
     }
@@ -71,7 +69,6 @@ class UserAuthController extends Controller
     }
 
     // حنلغي التعديل في واجهة الادمن والكاتب الي عملناهم في مرحلة التدريب لانه اي حد ممكن يوصل لالها
-
     public function editProfile()
     {
     }

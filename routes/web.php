@@ -24,12 +24,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//                                             كل قارد جديدة حنضيفها هان
+
+// This group is for guest
+//      Every new guard, we will add it here 'v'
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function () {
     Route::get('{guard}/login', [UserAuthController::class, 'showLogin'])->name('view.login');
     Route::post('{guard}/login', [UserAuthController::class, 'login']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
 });
 
+
+
+// This group is for auth Which people are logged in
 Route::prefix('cms/admin/')->group(function () {
     // main page
     Route::view('', 'cms.home')->name('home');
