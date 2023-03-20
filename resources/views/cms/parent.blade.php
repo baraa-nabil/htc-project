@@ -416,7 +416,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+                            <a href="{{ route('view.logout') }}" class="nav-link">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                 <p>Logout</p>
                             </a>

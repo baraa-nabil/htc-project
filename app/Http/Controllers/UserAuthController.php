@@ -19,7 +19,7 @@ class UserAuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator($request->all(), [
-            'email' => 'required|string|email', // بتاخد وعد اسم الجدول
+            'email' => 'required|string|email',
             'password' => 'required|string|min:6'
         ], []);
 
@@ -52,8 +52,16 @@ class UserAuthController extends Controller
 
     //get
     // لانه لما يفذ عمليه تسجيل الخروج راح يوجهه الى دالة تسجيل الدخول الرئيسية
-    public function logout()
+
+    public function logout(Request $request)
     {
+        $guard = auth('admin')->check() ? 'admin' : 'author';
+
+        Auth::guard($guard)->logout();
+
+        $request->session()->invalidate();
+
+        return redirect()->route('view.login', $guard);
     }
 
     //Display the password change interface

@@ -32,10 +32,14 @@ Route::prefix('cms/')->middleware('guest:admin,author')->group(function () {
     Route::post('{guard}/login', [UserAuthController::class, 'login']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
 });
 
+// This group is for auth and for logout
+Route::prefix('cms/admin')->middleware('auth:admin,author')->group(function () {
+    Route::get('logout', [UserAuthController::class, 'logout'])->name('view.logout');
+});
 
 
 // This group is for auth Which people are logged in
-Route::prefix('cms/admin/')->group(function () {
+Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function () {
     // main page
     Route::view('', 'cms.home')->name('home');
 
