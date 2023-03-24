@@ -2,7 +2,7 @@
 
 @section('title', 'Index')
 
-@section('main-title', 'Index Cities')
+@section('main-title', 'Index Role')
 
 @section('sub-title', 'Index')
 
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-header">
                     {{-- <h3 class="card-title">List Of Countries name</h3> --}}
-                    <a href="{{ route('cities.create') }}" type="submit" class="btn btn-info">Add New City</a>
+                    <a href="{{ route('roles.create') }}" type="submit" class="btn btn-info">Add New Role</a>
 
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -39,36 +39,35 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Street</th>
-                                <th>Country Name</th>
+                                <th>Role Name</th>
+                                <th>Guard Name</th>
+                                <th>Permissions</th>
                                 <th>Seeting</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cities as $city)
+                            @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{ $city->id }}</td>
-                                    <td>{{ $city->name }}</td>
-                                    <td>{{ $city->street }}</td>
-                                    {{-- // نجيب قيمة باستخدام العلاقة --}}
-                                    <td>{{ $city->country->name }}</td>
+                                    <td>{{ $role->id }}</td>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->guard_name }}</td>
+
+                                    <td><a href="{{ route('roles.permissions.index', $role->id) }}"
+                                            class="btn btn-info">({{ $role->permissions_count }})
+                                            permissions/s</a> </td>
+                                    <td>
+
                                     <td>
                                         {{-- delete --}}
-                                        @can('Delete City')
-                                            <button type="button" onclick="performDestroy({{ $city->id }}, this)"
-                                                class="btn btn-danger">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        @endcan
+                                        <button type="button" onclick="performDestroy({{ $role->id }}, this)"
+                                            class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
 
                                         {{-- edit --}}
-                                        @can('Edit City')
-                                            <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-success">
-                                                <i class="fa-solid fa-location-pen"></i>
-                                            </a>
-                                        @endcan
-
+                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-success">
+                                            <i class="fa-solid fa-location-pen"></i>
+                                        </a>
                                         {{-- <a href="{{ route('countries.show', $city->id) }}" type="button"
                                             class="btn btn-warning" style="color: white">
                                             <i class="fa-solid fa-eye"></i>
@@ -79,7 +78,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $cities->links() }}
+                {{ $roles->links() }}
             </div>
         </div>
     </div>
@@ -90,7 +89,7 @@
 
     <script>
         function performDestroy(id, reference) {
-            confirmDestroy('/cms/admin/cities/' + id, reference)
+            confirmDestroy('/cms/admin/roles/' + id, reference)
         }
     </script>
 

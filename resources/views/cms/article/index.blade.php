@@ -71,13 +71,13 @@
 
 
                                     <td>
-                                        <button type="button" onclick="performDestroy({{ $article->id }}, this)"
+                                        {{-- <button type="button" onclick="performDestroy({{ $article->id }}, this)"
                                             class="btn btn-danger">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                         <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-success">
                                             <i class="fa-solid fa-location-pen"></i>
-                                        </a>
+                                        </a> --}}
                                         <a href="{{ route('articles.show', $article->id) }}" type="button"
                                             class="btn btn-warning" style="color: white">
                                             <i class="fa-solid fa-eye"></i>

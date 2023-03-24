@@ -99,7 +99,7 @@
 
     <script>
         function performDestroy(id, reference) {
-            confirmDestroy('/cms/admin/categories/' + id, reference)
+            confirmDestroy('/cms/admin/articles/' + id, reference)
         }
     </script>
 

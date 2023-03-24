@@ -104,11 +104,14 @@
                                     <td>{{ $author->email }}</td>
                                     <td>{{ $author->user->gender ?? '' }}</td>
                                     <td>{{ $author->user->status ?? '' }}</td>
+
                                     <td>{{ $author->user->city->name ?? '' }}</td>
+
                                     <td><a href="{{ route('indexArticle', ['id' => $author->id]) }}"
                                             class="btn btn-info">({{ $author->articles_count }})
                                             article/s</a> </td>
                                     <td>
+
                                         {{-- delete --}}
                                         <button type="button" onclick="performDestroy({{ $author->id }}, this)"
                                             class="btn btn-danger">

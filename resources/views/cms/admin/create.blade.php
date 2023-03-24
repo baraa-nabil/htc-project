@@ -31,9 +31,17 @@
                                         <input type="text" class="form-control" id="firstname" name="firstname"
                                             placeholder="Enter Admin First Name">
                                     </div>
-                                    <br>
-                                    <br>
-                                    <br>
+
+                                    <div class="form-group col-md-12">
+                                        <label>Role Name</label>
+                                        <select class="form-control select2" id="role_id" name="role_id"
+                                            style="width: 100%;">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="form-groub col-md-12">
                                         <label for="lastname">Admin Last Name</label>
                                         <input type="text" class="form-control" id="lastname" name="lastname"
@@ -64,7 +72,7 @@
 
                                     <div class="form-groub col-md-12">
                                         <label for="date">Date of Birth</label>
-                                        <input type="date" class="form-control" id="date" name="passdateword"
+                                        <input type="date" class="form-control" id="date" name="date"
                                             placeholder="Enter Date of Birth">
                                     </div>
                                     <br>
@@ -145,6 +153,7 @@
             formData.append('status', document.getElementById('status').value);
             formData.append('mobile', document.getElementById('mobile').value);
             formData.append('city_id', document.getElementById('city_id').value);
+            formData.append('role_id', document.getElementById('role_id').value);
 
             //صورة او مجلد او فيديو، ودائما الصور والملفات تقبل القيمة الفارغة
             formData.append('image', document.getElementById('image').files[0]); // في العادة قيمة, ولكن هنا ملفات

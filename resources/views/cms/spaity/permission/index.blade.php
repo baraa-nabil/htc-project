@@ -2,7 +2,7 @@
 
 @section('title', 'Index')
 
-@section('main-title', 'Index Cities')
+@section('main-title', 'Index Permission')
 
 @section('sub-title', 'Index')
 
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-header">
                     {{-- <h3 class="card-title">List Of Countries name</h3> --}}
-                    <a href="{{ route('cities.create') }}" type="submit" class="btn btn-info">Add New City</a>
+                    <a href="{{ route('permissions.create') }}" type="submit" class="btn btn-info">Add New permission</a>
 
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -39,36 +39,29 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Street</th>
-                                <th>Country Name</th>
+                                <th>Permission Name</th>
+                                <th>Guard Name</th>
                                 <th>Seeting</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cities as $city)
+                            @foreach ($permissions as $permission)
                                 <tr>
-                                    <td>{{ $city->id }}</td>
-                                    <td>{{ $city->name }}</td>
-                                    <td>{{ $city->street }}</td>
-                                    {{-- // نجيب قيمة باستخدام العلاقة --}}
-                                    <td>{{ $city->country->name }}</td>
+                                    <td>{{ $permission->id }}</td>
+                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $permission->guard_name }}</td>
+
                                     <td>
                                         {{-- delete --}}
-                                        @can('Delete City')
-                                            <button type="button" onclick="performDestroy({{ $city->id }}, this)"
-                                                class="btn btn-danger">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        @endcan
+                                        <button type="button" onclick="performDestroy({{ $permission->id }}, this)"
+                                            class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
 
                                         {{-- edit --}}
-                                        @can('Edit City')
-                                            <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-success">
-                                                <i class="fa-solid fa-location-pen"></i>
-                                            </a>
-                                        @endcan
-
+                                        <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-success">
+                                            <i class="fa-solid fa-location-pen"></i>
+                                        </a>
                                         {{-- <a href="{{ route('countries.show', $city->id) }}" type="button"
                                             class="btn btn-warning" style="color: white">
                                             <i class="fa-solid fa-eye"></i>
@@ -79,7 +72,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $cities->links() }}
+                {{ $permissions->links() }}
             </div>
         </div>
     </div>
@@ -90,7 +83,7 @@
 
     <script>
         function performDestroy(id, reference) {
-            confirmDestroy('/cms/admin/cities/' + id, reference)
+            confirmDestroy('/cms/admin/permissions/' + id, reference)
         }
     </script>
 

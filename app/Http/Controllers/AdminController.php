@@ -9,6 +9,7 @@ use App\Models\User;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -34,8 +35,9 @@ class AdminController extends Controller
     {
         $cities = City::all();
         $countries = Country::all();
+        $roles = Role::where('guard_name', 'admin')->get(); // المسميات الوظيفية الخاصة بالادمن
 
-        return response()->view('cms.admin.create', compact('cities', 'countries'));
+        return response()->view('cms.admin.create', compact('cities', 'countries', 'roles'));
     }
 
     /**
@@ -69,6 +71,11 @@ class AdminController extends Controller
 
             if ($isSaved) {
                 $users = new User();
+
+                $roles = Role::findOrFail($request->get('role_id'));
+                $admins->assignRole($roles->name);
+
+
                 if (request()->hasFile('image')) {
 
                     $image = $request->file('image');
@@ -139,8 +146,8 @@ class AdminController extends Controller
     {
         $admins = Admin::findOrFail($id);
         $cities = City::all();
-
-        return response()->view('cms.admin.edit', compact('admins', 'cities'));
+        $roles = Role::all();
+        return response()->view('cms.admin.edit', compact('admins', 'cities', 'roles'));
     }
 
     /**

@@ -235,6 +235,67 @@
                                 </li>
                             </ul>
                         </li>
+                        {{-- Roles &  Permission --}}
+                        <li class="nav-header">Roles & Permission</li>
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-user"></i>
+                                <p>
+                                    Role
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('roles.index') }}" class="nav-link">
+                                        {{-- <i class="fas fa-angle-left right"></i> --}}
+                                        <i class="fa-solid fa-list"></i>
+                                        <p>Index</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('roles.create') }}" class="nav-link">
+                                        <i class="fa-solid fa-circle-plus"></i>
+
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                {{-- <i class="nav-icon far fa-solid fa-user-tie"></i> --}}
+                                {{-- <i class="fa-solid fa-user-tie"></i> --}}
+                                <i class="fa-solid fa-user"></i>
+                                <p>
+                                    Permission
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('permissions.index') }}" class="nav-link">
+                                        {{-- <i class="fas fa-angle-left right"></i> --}}
+                                        <i class="fa-solid fa-list"></i>
+                                        <p>Index</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('permissions.create') }}" class="nav-link">
+                                        <i class="fa-solid fa-circle-plus"></i>
+
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
                         <li class="nav-header">User Manegment</li>
 
                         <li class="nav-item">
@@ -248,20 +309,25 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admins.index') }}" class="nav-link">
-                                        {{-- <i class="fas fa-angle-left right"></i> --}}
-                                        <i class="fa-solid fa-list"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admins.create') }}" class="nav-link">
-                                        <i class="fa-solid fa-circle-plus"></i>
+                                @can('Index Admin')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admins.index') }}" class="nav-link">
+                                            {{-- <i class="fas fa-angle-left right"></i> --}}
+                                            <i class="fa-solid fa-list"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                        <p>Create</p>
-                                    </a>
-                                </li>
+                                @can('Create Admin')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admins.create') }}" class="nav-link">
+                                            <i class="fa-solid fa-circle-plus"></i>
+
+                                            <p>Create</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
                             </ul>
                         </li>
@@ -277,18 +343,22 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('authors.index') }}" class="nav-link">
-                                        <i class="fa-solid fa-list"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('authors.create') }}" class="nav-link">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                        <p>Create</p>
-                                    </a>
-                                </li>
+                                @can('Index Author')
+                                    <li class="nav-item">
+                                        <a href="{{ route('authors.index') }}" class="nav-link">
+                                            <i class="fa-solid fa-list"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('Create Author')
+                                    <li class="nav-item">
+                                        <a href="{{ route('authors.create') }}" class="nav-link">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                            <p>Create</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
                             </ul>
                         </li>
@@ -296,6 +366,7 @@
                         {{-- category --}}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+
                                 <i class="fa-solid fa-list-dropdown"></i>
                                 <p>
                                     Category
@@ -303,19 +374,22 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('categories.index') }}" class="nav-link">
-                                        <i class="fa-solid fa-list"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('categories.create') }}" class="nav-link">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                        <p>Create</p>
-                                    </a>
-                                </li>
-
+                                @can('Index Category')
+                                    <li class="nav-item">
+                                        <a href="{{ route('categories.index') }}" class="nav-link">
+                                            <i class="fa-solid fa-list"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('Create Category')
+                                    <li class="nav-item">
+                                        <a href="{{ route('categories.create') }}" class="nav-link">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                            <p>Create</p>
+                                        </a>
+                                    </li>
+                                @endcan
                             </ul>
                         </li>
 
@@ -329,12 +403,15 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('articles.index') }}" class="nav-link">
-                                        <i class="fa-solid fa-list"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
+                                @can('Index Article')
+                                    <li class="nav-item">
+                                        <a href="{{ route('articles.index') }}" class="nav-link">
+                                            <i class="fa-solid fa-list"></i>
+                                            <p>Index</p>
+                                        </a>
+                                    </li>
+                                @endcan
+
                                 {{-- <li class="nav-item">
                                     <a href="{{ route('articles.create') }}" class="nav-link">
                                         <i class="fa-solid fa-circle-plus"></i>
@@ -374,34 +451,40 @@
                             </ul>
                         </li>
 
-                        {{-- city --}}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                {{-- <i class="fa-solid fa-building"></i> --}}
-                                {{-- <i class="fa-sharp fa-regular fa-city"></i> --}}
-                                <i class="fa-thin fa-city"></i>
-                                <p>
-                                    City
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('cities.index') }}" class="nav-link">
-                                        <i class="fa-solid fa-list"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('cities.create') }}" class="nav-link">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                        <p>Create</p>
-                                    </a>
-                                </li>
 
-                            </ul>
-                        </li>
+                        @canAny(['Index City', 'Create City'])
+                            {{-- city --}}
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    {{-- <i class="fa-solid fa-building"></i> --}}
+                                    {{-- <i class="fa-sharp fa-regular fa-city"></i> --}}
+                                    <i class="fa-thin fa-city"></i>
+                                    <p>
+                                        City
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @can('Index City')
+                                        <li class="nav-item">
+                                            <a href="{{ route('cities.index') }}" class="nav-link">
+                                                <i class="fa-solid fa-list"></i>
+                                                <p>Index</p>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('Create City')
+                                        <li class="nav-item">
+                                            <a href="{{ route('cities.create') }}" class="nav-link">
+                                                <i class="fa-solid fa-circle-plus"></i>
+                                                <p>Create</p>
+                                            </a>
+                                        </li>
+                                    @endcan
 
+                                </ul>
+                            </li>
+                        @endcanany
                         <li class="nav-header">Seeting</li>
                         <li class="nav-item">
                             <a href="iframe.html" class="nav-link">

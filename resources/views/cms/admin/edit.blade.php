@@ -29,43 +29,52 @@
                                     <div class="form-groub col-md-12">
                                         <label for="firstname">Admin First Name</label>
                                         <input type="text" class="form-control" id="firstname" name="firstname"
-                                            placeholder="Enter Admin First Name">
+                                            placeholder="Enter Admin First Name" value="{{ $admins->user->firstname }}">
                                     </div>
                                     <br>
                                     <br>
+                                    <div class="form-group col-md-12">
+                                        <label>Role Name</label>
+                                        <select class="form-control select2" id="role_id" name="role_id"
+                                            style="width: 100%;">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <br>
                                     <div class="form-groub col-md-12">
                                         <label for="lastname">Admin Last Name</label>
                                         <input type="text" class="form-control" id="lastname" name="lastname"
-                                            placeholder="Enter Admin Last Name">
+                                            placeholder="Enter Admin Last Name"value="{{ $admins->user->lastname }}">
                                     </div>
                                     <br>
                                     <br>
                                     <div class="form-groub col-md-12">
                                         <label for="email">Email Admin</label>
                                         <input type="eamil" class="form-control" id="email" name="email"
-                                            placeholder="Enter Admin Email">
+                                            placeholder="Enter Admin Email"value="{{ $admins->email }}">
                                     </div>
                                     <br>
 
                                     <div class="form-groub col-md-12">
                                         <label for="password">Admin Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Enter Admin password">
+                                            placeholder="Enter Admin password" value="{{ $admins->password }}">
                                     </div>
                                     <br>
 
                                     <div class="form-groub col-md-12">
                                         <label for="mobile">Mobile Admin</label>
                                         <input type="text" class="form-control" id="mobile" name="mobile"
-                                            placeholder="Enter Admin mobile">
+                                            placeholder="Enter Admin mobile" value="{{ $admins->user->mobile }}">
                                     </div>
                                     <br>
 
                                     <div class="form-groub col-md-12">
                                         <label for="date">Date of Birth</label>
                                         <input type="date" class="form-control" id="date" name="passdateword"
-                                            placeholder="Enter Date of Birth">
+                                            placeholder="Enter Date of Birth" value="{{ $admins->user->date }}">
                                     </div>
                                     <br>
 
@@ -83,7 +92,8 @@
                                         <select class="form-control select2" id="city_id" name="city_id"
                                             style="width: 100%;">
                                             @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                                <option @if ($admins->user->city_id == $city->id) checked @endif
+                                                    value="{{ $city->id }}">{{ $city->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -92,16 +102,20 @@
                                     <div class="form-group col-md-6">
                                         <label for="gender">Gender</label>
                                         <select name="gender" id="gender" class="form-select form-select-sm">
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option value="male" @if ($admins->user->gender == 'male') checked @endif>Male
+                                            </option>
+                                            <option value="female" @if ($admins->user->gender == 'female') checked @endif>>Female
+                                            </option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="status">Status</label>
                                         <select name="status" id="status" class="form-select form-select-sm">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">InActive</option>
+                                            <option value="active" @if ($admins->user->status == 'active') checked @endif>Active
+                                            </option>
+                                            <option value="inactive" @if ($admins->user->status == 'inactive') checked @endif>
+                                                InActive</option>
                                         </select>
                                     </div>
 

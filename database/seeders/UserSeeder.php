@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\City;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class CitySeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\City::factory(10)->create();
+        \App\Models\User::factory(10)->create();
     }
 }
