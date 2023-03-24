@@ -195,6 +195,11 @@
                             alt="User Image">
                     </div>
                     <div class="info">
+                        {{-- Edit --}}
+                        {{-- if
+                            else
+                            ..
+                            --}}
                         <a href="#" class="d-block">Alexander Pierce</a>
                     </div>
                 </div>

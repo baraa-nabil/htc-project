@@ -96,7 +96,7 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function () 
 
     // permissions
     Route::resource('permissions', PermissionController::class);
-    Route::post('permissions_update/{id}', [PermissionController::class, 'update'])->name('categories_update');
+    Route::post('permissions_update/{id}', [PermissionController::class, 'update'])->name('permissions_update');
 
     Route::resource('roles.permissions', RolePermissionController::class);
 });

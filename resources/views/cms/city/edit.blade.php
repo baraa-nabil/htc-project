@@ -58,7 +58,7 @@
                             <div class="card-footer">
                                 {{-- <button type="submit" class="btn btn-primary">Stor</button> --}}
                                 <button type="button" onclick="performUpdate({{ $cities->id }})"
-                                    class="btn btn-primary">Store</button>
+                                    class="btn btn-primary">update</button>
                                 <a href="{{ route('cities.index') }}" type="submit" class="btn btn-info">Go Back</a>
                             </div>
                         </form>

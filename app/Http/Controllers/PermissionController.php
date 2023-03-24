@@ -91,12 +91,13 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator($request->all(), []);
-        if (!$validator->fails()) {
-            $permissinos = Permission::findOrFail($id);
-            $permissinos->name = $request->get('name');
-            $permissinos->guard_name = $request->get('guard_name');
 
-            $isSaved = $permissinos->save();
+        if (!$validator->fails()) {
+            $permissions = Permission::findOrFail($id);
+            $permissions->name = $request->get('name');
+            $permissions->guard_name = $request->get('guard_name');
+
+            $isSaved = $permissions->save();
 
             return ['redirect' => route('permissions.index')];
 

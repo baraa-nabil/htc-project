@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Author;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\User;
@@ -23,6 +24,9 @@ class AdminController extends Controller
         // $users = User::all();admins
         $admins = Admin::orderBy('id', 'desc')->paginate(5);
         // return response()->view('cms.admin.index', compact('admins'));
+
+        $this->authorize('viewAny', Admin::class);
+
         return response()->view('cms.admin.index', compact('admins'));
     }
 
@@ -36,6 +40,8 @@ class AdminController extends Controller
         $cities = City::all();
         $countries = Country::all();
         $roles = Role::where('guard_name', 'admin')->get(); // المسميات الوظيفية الخاصة بالادمن
+
+        $this->authorize('create', Admin::class);
 
         return response()->view('cms.admin.create', compact('cities', 'countries', 'roles'));
     }

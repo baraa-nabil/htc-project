@@ -49,8 +49,13 @@
                                 <tr>
                                     <td>{{ $permission->id }}</td>
                                     <td>{{ $permission->name }}</td>
-                                    <td>{{ $permission->guard_name }}</td>
+                                    <td
+                                        @if ($permission->guard_name == 'admin') class="btn btn-success"
+                                             @else
+                                             class="btn btn-danger" @endif>
+                                        {{ $permission->guard_name }}
 
+                                    </td>
                                     <td>
                                         {{-- delete --}}
                                         <button type="button" onclick="performDestroy({{ $permission->id }}, this)"

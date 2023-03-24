@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Author;
 use App\Models\City;
 use App\Models\Country;
@@ -21,6 +22,12 @@ class AuthorController extends Controller
         // $users = User::all();
         $authors = Author::withCount('articles')->orderBy('id', 'desc')->paginate(5);
         // return response()->view('cms.admin.index', compact('authors$authors'));
+
+        // $this->authorize('viewAny', Admin::class);
+
+        $this->authorize('viewAny', Admin::class);
+
+
         return response()->view('cms.author.index', compact('authors'));
     }
 

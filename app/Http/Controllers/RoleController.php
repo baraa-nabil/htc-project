@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller Develop
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -90,26 +90,25 @@ class RoleController extends Controller Develop
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { {
-            $validator = Validator($request->all(), []);
-            if (!$validator->fails()) {
-                $roles = Role::findOrFail($id);
-                $roles->name = $request->get('name');
-                $roles->guard_name = $request->get('guard_name');
+    {
+        $validator = Validator($request->all(), []);
+        if (!$validator->fails()) {
+            $roles = Role::findOrFail($id);
+            $roles->name = $request->get('name');
+            $roles->guard_name = $request->get('guard_name');
 
-                $isUpdated = $roles->save();
+            $isUpdated = $roles->save();
 
-                // return response()->json([
-                //     'icon' => 'success',
-                //     'title' => 'Created is Successfully'
-                // ], 200);
-                return ['redirect' => route('roles.index')];
-            } else {
-                return response()->json([
-                    'icon' => 'error',
-                    'title' => $validator->getMessageBag()->first(),
-                ], 400);
-            }
+            // return response()->json([
+            //     'icon' => 'success',
+            //     'title' => 'Created is Successfully'
+            // ], 200);
+            return ['redirect' => route('roles.index')];
+        } else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => $validator->getMessageBag()->first(),
+            ], 400);
         }
     }
 

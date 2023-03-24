@@ -25,14 +25,15 @@
                         <form>
                             <div class="card-body">
 
-                                <div class="form-group">
-                                    <label>Guard Name</label>
-                                    <select class="form-control select2" id="guard_name" name="guard_name"
-                                        style="width: 100%;">
+                                <div class="form-group col-md-6">
+                                    <label for="guard_name"> Guard Name </label>
+                                    <select class="form-control" name="guard_name" style="width: 100%;" id="guard_name"
+                                        aria-label=".form-select-sm example">
                                         <option value="admin" @if ($permissions->guard_name == 'admin') selected @endif>Admin
                                         </option>
                                         <option value="author" @if ($permissions->guard_name == 'author') selected @endif>Author
                                         </option>
+
                                     </select>
                                 </div>
 
@@ -47,7 +48,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 {{-- <button type="submit" class="btn btn-primary">Stor</button> --}}
-                                <button type="button" onclick="performUpdate($permissions->id)"
+                                <button type="button" onclick="performUpdate({{ $permissions->id }})"
                                     class="btn btn-primary">Update</button>
                                 <a href="{{ route('permissions.index') }}" type="submit" class="btn btn-info">Go Back</a>
                             </div>
