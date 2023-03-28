@@ -32,10 +32,10 @@ use Illuminate\Support\Facades\Route;
 // sing
 
 
-Route::prefix('cms/new')->group(function () {
-    Route::get('/', [SinginController::class, 'showSingin']);
-    Route::post('signin', [SinginController::class, 'signIn']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
-});
+// Route::prefix('cms/new')->group(function () {
+//     Route::get('/', [SinginController::class, 'showSingin']);
+//     Route::post('signin', [SinginController::class, 'signIn']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
+// });
 
 // This group is for guest
 //      Every new guard, we will add it here 'v'
@@ -50,7 +50,8 @@ Route::prefix('cms/admin')->middleware('auth:admin,author')->group(function () {
 });
 
 
-// This group is for auth Which people are logged in
+
+// This group is for auth Which users are logged in
 Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function () {
     // General :
     // main page

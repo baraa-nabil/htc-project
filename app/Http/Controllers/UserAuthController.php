@@ -24,6 +24,7 @@ class UserAuthController extends Controller
         ], []);
 
         // اسم متفق عليه
+
         $credentials = [
             'email' => $request->get('email'),
             'password' => $request->get('password'),

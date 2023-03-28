@@ -26,6 +26,7 @@
                             <div class="card-body">
 
                                 <div class="row">
+
                                     <div class="form-groub col-md-12">
                                         <label for="firstname">Admin First Name</label>
                                         <input type="text" class="form-control" id="firstname" name="firstname"
@@ -33,7 +34,7 @@
                                     </div>
                                     <br>
                                     <br>
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group">
                                         <label>Role Name</label>
                                         <select class="form-control select2" id="role_id" name="role_id"
                                             style="width: 100%;">
@@ -57,11 +58,11 @@
                                     </div>
                                     <br>
 
-                                    <div class="form-groub col-md-12">
+                                    {{-- <div class="form-groub col-md-12">
                                         <label for="password">Admin Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
                                             placeholder="Enter Admin password" value="{{ $admins->password }}">
-                                    </div>
+                                    </div> --}}
                                     <br>
 
                                     <div class="form-groub col-md-12">
@@ -93,7 +94,8 @@
                                             style="width: 100%;">
                                             @foreach ($cities as $city)
                                                 <option @if ($admins->user->city_id == $city->id) checked @endif
-                                                    value="{{ $city->id }}">{{ $city->name }}</option>
+                                                    value="{{ $city->id }}">
+                                                    {{ $city->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -130,8 +132,9 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
 
-                                <button type="button" onclick="performStore()" class="btn btn-primary">Store</button>
-                                <a href="{{ route('admins.index') }}" type="submit" class="btn btn-info">Go Back</a>
+                                <button type="button" onclick="performUpdate({{ $admins->id }})"
+                                    class="btn btn-primary">Update</button> <a href="{{ route('admins.index') }}"
+                                    type="submit" class="btn btn-info">Go Back</a>
                             </div>
                         </form>
                     </div>
@@ -147,23 +150,25 @@
 
 
     <script>
-        function performStore() {
+        function performUpdate(id) {
             let formData = new FormData();
             // الترتيب مش مهم
             formData.append('firstname', document.getElementById('firstname').value);
             formData.append('lastname', document.getElementById('lastname').value);
             formData.append('email', document.getElementById('email').value);
-            formData.append('password', document.getElementById('password').value);
+            // formData.append('password', document.getElementById('password').value);
             formData.append('date', document.getElementById('date').value);
             formData.append('gender', document.getElementById('gender').value);
             formData.append('status', document.getElementById('status').value);
             formData.append('mobile', document.getElementById('mobile').value);
             formData.append('city_id', document.getElementById('city_id').value);
+            formData.append('role_id', document.getElementById('role_id').value);
 
             //صورة او مجلد او فيديو، ودائما الصور والملفات تقبل القيمة الفارغة
             formData.append('image', document.getElementById('image').files[0]); // في العادة قيمة, ولكن هنا ملفات
 
-            store('/cms/admin/admins', formData)
+            storeRoute('/cms/admin/admins_update/' + id, formData)
+
         }
     </script>
 

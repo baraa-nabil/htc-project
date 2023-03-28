@@ -20,4 +20,14 @@ class Author extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
+    public function getFullNameAttribute() // full_name
+    {
+        return $this->user->firstname . " " . $this->user->lastname;
+    }
+
+    public function getImagesAttribute() //images
+    {
+        return $this->user->image;
+    }
 }

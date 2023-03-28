@@ -150,9 +150,12 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
+        // where('guard_name', 'admin')->get()
+        // $admins = Admin::where('guard_name', 'admin')->findOrFail($id);
+        $roles = Role::where('guard_name', 'admin')->get();
         $admins = Admin::findOrFail($id);
         $cities = City::all();
-        $roles = Role::all();
+
         return response()->view('cms.admin.edit', compact('admins', 'cities', 'roles'));
     }
 
@@ -186,6 +189,9 @@ class AdminController extends Controller
 
             if ($isUpdat) {
                 $users = $admins->user;
+
+                $roles = Role::findOrFail($request->get('role_id'));
+                $admins->assignRole($roles->name);
 
                 if (request()->hasFile('image')) {
 

@@ -143,7 +143,7 @@ class CreatePermissionTables extends Migration
 
         Schema::drop($tableNames['role_has_permissions']); //الجدول الوسيط بين ال" roles - permission "
 
-        Schema::drop($tableNames['model_has_roles']); // Morph : مين الادمن الي ماخد المسمى الوظيفي
+        Schema::drop($tableNames['']); // Morph : مين الادمن الي ماخد المسمى الوظيفي
 
         Schema::drop($tableNames['model_has_permissions']); // Morph : مين المستخدم الي ماخد الصلاحية
 
