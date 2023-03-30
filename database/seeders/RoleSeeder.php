@@ -22,14 +22,15 @@ class RoleSeeder extends Seeder
     { {
             // Role
             // Admin
-            // Role::create(['name' => 'Super Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
-            // Role::create(['name' => 'Sub Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Role::create(['name' => 'Super Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Role::create(['name' => 'Sub Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
             Role::create(['name' => 'Admin C', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
 
             // Author
             Role::create(['name' => 'Author A', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
             Role::create(['name' => 'Author C', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
             Role::create(['name' => 'Author B', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
 
 
             // Permission
