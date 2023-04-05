@@ -29,13 +29,8 @@ Route::get('/', function () {
 });
 
 
-// sing
 
 
-// Route::prefix('cms/new')->group(function () {
-//     Route::get('/', [SinginController::class, 'showSingin']);
-//     Route::post('signin', [SinginController::class, 'signIn']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
-// });
 
 // This group is for guest
 //      Every new guard, we will add it here 'v'

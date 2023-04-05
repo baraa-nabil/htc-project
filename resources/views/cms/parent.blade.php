@@ -210,9 +210,6 @@
                                 <img class="brand-image img-circle elevation-3"
                                     src="{{ asset('storage/images/admin/d.png') }}"alt="User Image">
                             @endif
-                        @else
-                            {{-- <img class="brand-image img-circle elevation-3" src="{{ asset('images/userSolid.png') }}"alt="User Image"> --}}
-
                         @endif
                         {{-- <img src="{{ asset('cms/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" --}}
 
@@ -554,7 +551,8 @@
                         <li class="nav-header">Seeting</li>
                         @if (Auth::guard('admin')->id())
                             <li class="nav-item">
-                                <a href="{{ route('admins.edit') }}" class="nav-link">
+                                {{-- <a href="{{ route('admins.edit') }}" class="nav-link"> --}}
+                                <a href="{{ url('cms/admins/{id()}/edit') }}" class="nav-link">
                                     <i class="fa-solid fa-user-pen"></i>
                                     <p>Edit your profile</p>
                                 </a>
@@ -567,15 +565,15 @@
                                 </a>
                             </li>
                         @endif
-                        @endif
                         {{-- Change password --}}
-                        @if (Auth::guard('admin')->id())
-                        <li class="nav-item">
-                            <a href="{{ route('cms.admin.edit-password') }}" class="nav-link">
-                                <i class="fa-solid fa-unlock"></i>
-                                <p>Change password</p>
-                            </a>
-                        </li>
+                        {{-- @if (Auth::guard('admin')->id())
+                            <li class="nav-item">
+                                <a href="{{ route('cms.admin.edit-password') }}" class="nav-link">
+                                    <i class="fa-solid fa-unlock"></i>
+                                    <p>Change password</p>
+                                </a>
+                            </li>
+                        @endif --}}
                         <li class="nav-item">
                             <a href="{{ route('view.logout') }}" class="nav-link">
                                 <i class="fa-solid fa-right-from-bracket"></i>
