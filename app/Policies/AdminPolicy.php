@@ -18,8 +18,6 @@ class AdminPolicy
      */
     public function viewAny()
     {
-
-
         if (auth('admin')->check()) {
             return auth()->user()->hasPermissionTo('Index Admin')
                 ?  $this->allow()

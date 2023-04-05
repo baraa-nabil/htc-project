@@ -196,11 +196,11 @@
                             alt="User Image"> --}}
                         @if (Auth::guard('admin')->id())
                             @if (auth('admin')->user()->images != '')
-                                <img class="brand-image img-circle elevation-3"
+                                <img class="brand-image img-circle elevation-3" style="width: 57px;height: 57px;"
                                     src="{{ asset('storage/images/admin/' . auth('admin')->user()->images) }}"alt="User Image">
                             @else
                                 <img class="brand-image img-circle elevation-3"
-                                    src="{{ asset('images/userSolid.png') }}"alt="User Image">
+                                    src="{{ asset('storage/images/admin/d.png') }}"alt="User Image">
                             @endif
                         @elseif (Auth::guard('author')->id())
                             @if (auth('author')->user()->images != '')
@@ -208,7 +208,7 @@
                                     class="brand-image img-circle elevation-3" alt="User Image">
                             @else
                                 <img class="brand-image img-circle elevation-3"
-                                    src="{{ asset('images/userSolid.png') }}"alt="User Image">
+                                    src="{{ asset('storage/images/admin/d.png') }}"alt="User Image">
                             @endif
                         @else
                             {{-- <img class="brand-image img-circle elevation-3" src="{{ asset('images/userSolid.png') }}"alt="User Image"> --}}
@@ -219,7 +219,7 @@
 
                     </div>
 
-                    <div class="info">
+                    <div class="info" style="display: flex;align-items: center;height: inherit;">
                         {{-- Edit --}}
                         {{-- if
                             else
@@ -554,20 +554,24 @@
                         <li class="nav-header">Seeting</li>
                         @if (Auth::guard('admin')->id())
                             <li class="nav-item">
-                                {{-- <a href="{{ route('admins.edit', auth('admin')->$id) }}" class="nav-link"> --}}
-                                {{-- <img src="{{ asset('storage/images/author/' . auth('author')->user()->images) }}" --}}
-
-                                <i class="fa-solid fa-user-pen"></i>
-                                <p>Edit your profile</p>
-                                {{-- <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-success"> --}}
-
+                                <a href="{{ route('admins.edit') }}" class="nav-link">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                    <p>Edit your profile</p>
                                 </a>
                             </li>
+                        @elseif (Auth::guard('auther')->id())
+                            <li class="nav-item">
+                                <a href="{{ route('authors.edit') }}" class="nav-link">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                    <p>Edit your profile</p>
+                                </a>
                             </li>
                         @endif
+                        @endif
                         {{-- Change password --}}
+                        @if (Auth::guard('admin')->id())
                         <li class="nav-item">
-                            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+                            <a href="{{ route('cms.admin.edit-password') }}" class="nav-link">
                                 <i class="fa-solid fa-unlock"></i>
                                 <p>Change password</p>
                             </a>

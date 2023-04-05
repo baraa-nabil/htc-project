@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthorController extends Controller
 {
@@ -40,8 +41,9 @@ class AuthorController extends Controller
     {
         $cities = City::all();
         $countries = Country::all();
+        $roles = Role::where('guard_name', 'author')->get();
 
-        return response()->view('cms.author.create', compact('cities', 'countries'));
+        return response()->view('cms.author.create', compact('cities', 'countries', 'roles'));
     }
 
     /**
@@ -69,12 +71,14 @@ class AuthorController extends Controller
             $authors->email = $request->get('email');
             $authors->password = Hash::make($request->get('password'));
 
+
             $isSaved = $authors->save();
 
             // كل عمود لحال
 
             if ($isSaved) {
                 $users = new User();
+
                 if (request()->hasFile('image')) {
 
                     $image = $request->file('image');
@@ -86,7 +90,8 @@ class AuthorController extends Controller
                     $users->image = $imageName;
                 }
 
-
+                $roles = Role::findOrFail($request->get('role_id'));
+                $authors->assignRole($roles->name);
 
                 $users->firstname = $request->get('firstname');
                 $users->lastname = $request->get('lastname');

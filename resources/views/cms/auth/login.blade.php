@@ -120,7 +120,7 @@
                 )
 
                 .then(function(response) {
-                    window.location.href = '/cms/admin'
+                    window.location.href = '/cms/home'
 
                 })
 

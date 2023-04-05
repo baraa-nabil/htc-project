@@ -19,8 +19,9 @@
             <div class="card">
                 <div class="card-header">
                     {{-- <h3 class="card-title">List Of Countries name</h3> --}}
+                    @can('Create Admin')
                     <a href="{{ route('admins.create') }}" type="submit" class="btn btn-info">Add New Admin</a>
-
+                    @endcan
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -81,8 +82,8 @@
                                         </td>
                                     @else
                                         <td><img class="img-circle img-bordered-sm"
-                                                src="{{ asset('storage/images/admin/avatar-g35f3c61b5_1920.png') }}"
-                                                alt="" width="60" height="60">
+                                                src="{{ asset('storage/images/admin/d.png') }}" alt=""
+                                                width="60" height="60">
                                         </td>
                                     @endif
 
@@ -105,19 +106,26 @@
                                     <td>{{ $admin->user->city->name ?? '' }}</td>
                                     <td>
                                         {{-- delete --}}
+                                        @can('Delete Admin')
                                         <button type="button" onclick="performDestroy({{ $admin->id }}, this)"
                                             class="btn btn-danger">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
-
+                                        @endcan
                                         {{-- edit --}}
+                                        @can('Edit Admin')
                                         <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-success">
                                             <i class="fa-solid fa-location-pen"></i>
                                         </a>
+                                        @endcan
+                                        {{-- show --}}
+                                        @can('Show Admin')
                                         <a href="{{ route('admins.show', $admin->id) }}" type="button"
                                             class="btn btn-warning" style="color: white">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
+                                        @endcan
+
                                     </td>
                                 </tr>
                             @endforeach

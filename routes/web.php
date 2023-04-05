@@ -24,9 +24,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('cms.button_users1');
+});
 
 
 // sing
@@ -45,7 +45,7 @@ Route::prefix('cms/')->middleware('guest:admin,author')->group(function () {
 });
 
 // This group is for auth and for logout
-Route::prefix('cms/admin')->middleware('auth:admin,author')->group(function () {
+Route::prefix('cms/home')->middleware('auth:admin,author')->group(function () {
     Route::get('logout', [UserAuthController::class, 'logout'])->name('view.logout');
 });
 
