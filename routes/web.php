@@ -5,12 +5,16 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\front\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SinginController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\ViewerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,11 +41,21 @@ Route::get('/', function () {
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function () {
     Route::get('{guard}/login', [UserAuthController::class, 'showLogin'])->name('view.login');
     Route::post('{guard}/login', [UserAuthController::class, 'login']); // ما بيلزمها اسم عشان هي عبارة عن اضافة وليس عرض
+
 });
 
+
 // This group is for auth and for logout
-Route::prefix('cms/home')->middleware('auth:admin,author')->group(function () {
+Route::prefix('cms/admin')->middleware('auth:admin,author')->group(function () {
     Route::get('logout', [UserAuthController::class, 'logout'])->name('view.logout');
+    // Route::get('/logout', [UserAuthController::class, 'Logout'])->name('cms.admin.logout');
+    // Route::get('profile/edit', [UserAuthController::class, 'editProfile'])->name('cms.auth.edit-profile');
+    Route::get('profile/edit', [UserAuthController::class, 'editProfile'])->name('cms.auth.edit-profile');
+    // Route::post('profile/update', [UserAuthController::class, 'updateProfile'])->name('cms.auth.update-profile');
+    // Route::get('password/edit', [UserAuthController::class, 'editPassword'])->name('cms.admin.edit-password');
+    // Route::post('update/password', [UserAuthController::class, 'updatePassword'])->name('dashboard.auth.update-password');
+    // Route::get('edit/password' , [SettingController::class , 'editPassword'])->name('cms.auth.editPassword');
+    // Route::post('update/password' , [SettingController::class , 'updatePassword'])->name('cms.auth.updatePassword');
 });
 
 
@@ -71,13 +85,21 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function () 
     Route::resource('authors', AuthorController::class);
     Route::post('authors_update/{id}', [AuthorController::class, 'update'])->name('authors_update');
 
+    // viewers
+    Route::resource('viewers', ViewerController::class);
+    Route::post('viewers_update/{id}', [ViewerController::class, 'update'])->name('viewers_update');
+
     // categories
     Route::resource('categories', CategoryController::class);
     Route::post('categories_update/{id}', [CategoryController::class, 'update'])->name('categories_update');
 
+    // sliders
+    Route::resource('sliders', SliderController::class);
+    Route::post('sliders_update/{id}', [SliderController::class, 'update'])->name('sliders_update');
+
     // articles
     Route::resource('articles', ArticleController::class);
-    Route::post('articles_update/{id}', [ArticleController::class, 'update'])->name('categories_update');
+    Route::post('articles_update/{id}', [ArticleController::class, 'update'])->name('articles_update');
 
     // indexArticle
     Route::get('index/article/{id}', [ArticleController::class, 'indexArticle'])->name('indexArticle');
@@ -95,4 +117,13 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function () 
     Route::post('permissions_update/{id}', [PermissionController::class, 'update'])->name('permissions_update');
 
     Route::resource('roles.permissions', RolePermissionController::class);
+    // contacts
+    Route::resource('contacts', ContactController::class);
+});
+
+// web
+Route::prefix('news/')->group(function () {
+    Route::get('index', [HomeController::class, 'home'])->name('homeWeb');
+    Route::get('all/{id}', [HomeController::class, 'all'])->name('all');
+    Route::get('det/{id}', [HomeController::class, 'det'])->name('det');
 });

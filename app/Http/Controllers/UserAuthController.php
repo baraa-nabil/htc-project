@@ -118,12 +118,13 @@ class UserAuthController extends Controller
     // }
 
     // حنلغي التعديل في واجهة الادمن والكاتب الي عملناهم في مرحلة التدريب لانه اي حد ممكن يوصل لالها
+
     public function editProfile(Request $request)
     {
 
         $admins = Admin::findOrFail(Auth::guard('admin')->id());
         $cities = City::all();
-        return response()->view('dashboard.auth.edit-profile', compact('admins', 'cities'));
+        return response()->view('cms.auth.edit-profile', compact('admins', 'cities'));
     }
 
     public function updateProfile(Request $request)

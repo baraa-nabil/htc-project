@@ -83,6 +83,16 @@ class RoleSeeder extends Seeder
             Permission::create(['name' => 'Index Permission', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
             Permission::create(['name' => 'Edit Permission', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
             Permission::create(['name' => 'Delete Permission', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            //Viewer
+            Permission::create(['name' => 'Create Viewer', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Index Viewer', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Edit Viewer', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Delete Viewer', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            //Slider
+            Permission::create(['name' => 'Create Slider', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Index Slider', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Edit Slider', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Delete Slider', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
 
 
             // Author Guard
@@ -133,6 +143,17 @@ class RoleSeeder extends Seeder
             Permission::create(['name' => 'Index Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
             Permission::create(['name' => 'Edit Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
             Permission::create(['name' => 'Delete Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
+            //Viewer
+            Permission::create(['name' => 'Create Viewer', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Index Viewer', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Edit Viewer', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Delete Viewer', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            //Slider
+            Permission::create(['name' => 'Create Slider', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Index Slider', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Edit Slider', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+            Permission::create(['name' => 'Delete Slider', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
         }
     }
 }

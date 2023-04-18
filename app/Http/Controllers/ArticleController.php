@@ -121,14 +121,21 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+    // {
+    //     $authors = Author::all();
+    //     $categories = Category::where('status', 'active')->get();
+    //     $articles = Article::findOrFail($id);
+
+    //     return view('cms.article.edit', compact('categories', 'authors', 'articles', 'id'));
+    // }
+
     {
         $authors = Author::all();
-        $categories = Category::where('status', 'like', 'active')->get();
+        $categories = Category::where('status', 'active')->get();
         $articles = Article::findOrFail($id);
 
-        return view('cms.article.edit', compact('categories', 'authors', 'articles', 'id'));
+        return view('cms.article.edit', compact('authors', 'categories', 'articles', 'id'));
     }
-
     /**
      * Update the specified resource in storage.
      *

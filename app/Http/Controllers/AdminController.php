@@ -41,7 +41,7 @@ class AdminController extends Controller
         $countries = Country::all();
         $roles = Role::where('guard_name', 'admin')->get(); // المسميات الوظيفية الخاصة بالادمن
 
-        $this->authorize('create', Admin::class);
+        // $this->authorize('create', Admin::class);
 
         return response()->view('cms.admin.create', compact('cities', 'countries', 'roles'));
     }
@@ -213,7 +213,7 @@ class AdminController extends Controller
                 $users->city_id = $request->get('city_id');
                 $users->actor()->associate($admins);
 
-                $isUpdat = $users->save();
+                $isUpdate = $users->save();
 
                 return ['redirect' => route('admins.index')];
             }

@@ -11,6 +11,6 @@ class Category extends Model
 
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class)->take(4)->orderBy('updated_at', 'desc');
     }
 }

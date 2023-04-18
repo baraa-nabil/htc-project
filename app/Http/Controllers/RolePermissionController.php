@@ -13,13 +13,40 @@ class RolePermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($roleId)
+    public function index($roleId, Request $request)
     {
 
         // $permissions = Permission::all();
         //  return response()->view('cms.spatie.roles.role-permissions', ['permissions' => $permissions]);
 
         //
+        // $permissions = Permission::all();
+        //  return response()->view('cms.spatie.roles.role-permissions', ['permissions' => $permissions]);
+        // $permissions = Permission::orderBy("id",'desc');
+        $role = Role::where('id', $roleId)->get();
+        foreach ($role as $item) {
+
+            if ($item->guard_name == 'admin') {
+                $permissions = Permission::where('guard_name', 'admin')->orderBy("id", 'desc');
+            }
+            if ($item->guard_name == 'author') {
+                $permissions = Permission::where('guard_name', 'trainer')->orderBy("id", 'desc');
+            }
+        }
+
+        if ($request->get('search')) {
+            $moduleIndex = Permission::where('created_at', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->get('name')) {
+            $permissions = Permission::where('name', 'like', '%' . $request->name . '%');
+        }
+        if ($request->get('guard_name')) {
+            $permissions = Permission::where('guard_name', 'like', '%' . $request->guard_name . '%');
+        }
+        if ($request->status != null) {
+            $permissions = Permission::where('status', $request->status);
+        }
         $permissions = Permission::all();
         $rolePermissions = Role::findOrFail($roleId)->permissions;
 

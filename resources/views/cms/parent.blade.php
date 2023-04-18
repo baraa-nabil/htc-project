@@ -47,11 +47,10 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -168,8 +167,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
-                        role="button">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
@@ -195,437 +193,520 @@
                         {{-- <img src="{{ asset('cms/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                             alt="User Image"> --}}
                         @if (Auth::guard('admin')->id())
-                            @if (auth('admin')->user()->images != '')
-                                <img class="brand-image img-circle elevation-3" style="width: 57px;height: 57px;"
-                                    src="{{ asset('storage/images/admin/' . auth('admin')->user()->images) }}"alt="User Image">
-                            @else
-                                <img class="brand-image img-circle elevation-3"
-                                    src="{{ asset('storage/images/admin/d.png') }}"alt="User Image">
-                            @endif
-                        @elseif (Auth::guard('author')->id())
-                            @if (auth('author')->user()->images != '')
-                                <img src="{{ asset('storage/images/author/' . auth('author')->user()->images) }}"
-                                    class="brand-image img-circle elevation-3" alt="User Image">
-                            @else
-                                <img class="brand-image img-circle elevation-3"
-                                    src="{{ asset('storage/images/admin/d.png') }}"alt="User Image">
-                            @endif
-                        @endif
-                        {{-- <img src="{{ asset('cms/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" --}}
-
-
-                    </div>
-
-                    <div class="info" style="display: flex;align-items: center;height: inherit;">
-                        {{-- Edit --}}
-                        {{-- if
-                            else
-                            ..
-                            --}}
-                        {{-- User Name --}}
-                        @if (Auth::guard('admin')->id())
-                            <a href="#" class="d-block"> {{ auth('admin')->user()->full_name }}</a>
-                        @elseif (Auth::guard('author')->id())
-                            <a href="#" class="d-block"> {{ auth('author')->user()->full_name }}</a>
+                        @if (auth('admin')->user()->images != '')
+                        <img class="brand-image img-circle elevation-3" style="width: 57px;height: 57px;"
+                            src="{{ asset('storage/images/admin/' . auth('admin')->user()->images) }}" alt="User Image">
                         @else
-                            <a href="#" class="d-block"> users</a>
+                        <img class="brand-image img-circle elevation-3" src="{{ asset('storage/images/admin/d.png') }}"
+                            alt="User Image">
                         @endif
-                    </div>
-                </div>
-
-                <!-- SidebarSearch Form -->
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./index.html" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        {{-- Roles &  Permission --}}
-                        @canany(['Index Role', 'Create Role', 'Index Permission', 'Create Permission'])
-                            <li class="nav-header">Roles & Permission</li>
-                            @canany(['Index Role', 'Create Role'])
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-user"></i>
-                                        <p>
-                                            Role
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        @can('Index Role')
-                                            <li class="nav-item">
-                                                <a href="{{ route('roles.index') }}" class="nav-link">
-                                                    {{-- <i class="fas fa-angle-left right"></i> --}}
-                                                    <i class="fa-solid fa-list"></i>
-                                                    <p>Index</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-                                        @can('Create Role')
-                                            <li class="nav-item">
-                                                <a href="{{ route('roles.create') }}" class="nav-link">
-                                                    <i class="fa-solid fa-circle-plus"></i>
-
-                                                    <p>Create</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-
-                                    </ul>
-                                </li>
-                            @endcanany
-                            @canany(['Index Permission', 'Create Permission'])
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        {{-- <i class="nav-icon far fa-solid fa-user-tie"></i> --}}
-                                        {{-- <i class="fa-solid fa-user-tie"></i> --}}
-                                        <i class="fa-solid fa-user"></i>
-                                        <p>
-                                            Permission
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        @can('Index Permission')
-                                            <li class="nav-item">
-                                                <a href="{{ route('permissions.index') }}" class="nav-link">
-                                                    {{-- <i class="fas fa-angle-left right"></i> --}}
-                                                    <i class="fa-solid fa-list"></i>
-                                                    <p>Index</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-                                        @can('Create Permission')
-                                            <li class="nav-item">
-                                                <a href="{{ route('permissions.create') }}" class="nav-link">
-                                                    <i class="fa-solid fa-circle-plus"></i>
-
-                                                    <p>Create</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-
-                                    </ul>
-                                </li>
-                            @endcanany
-                        @endcanany
-
-                        {{-- User Manegment --}}
-                        @canany(['Index Admin', 'Create Admin', 'Index Author', 'Create Author', 'Index Category',
-                            'Create Category', 'Index Article', 'Create Article'])
-                            <li class="nav-header">User Manegment</li>
-                            @canany(['Index Admin', 'Create Admin'])
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        {{-- <i class="nav-icon far fa-solid fa-user-tie"></i> --}}
-                                        {{-- <i class="fa-solid fa-user-tie"></i> --}}
-                                        <i class="fa-solid fa-user"></i>
-                                        <p>
-                                            Admin
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        @can('Index Admin')
-                                            <li class="nav-item">
-                                                <a href="{{ route('admins.index') }}" class="nav-link">
-                                                    {{-- <i class="fas fa-angle-left right"></i> --}}
-                                                    <i class="fa-solid fa-list"></i>
-                                                    <p>Index</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-
-                                        @can('Create Admin')
-                                            <li class="nav-item">
-                                                <a href="{{ route('admins.create') }}" class="nav-link">
-                                                    <i class="fa-solid fa-circle-plus"></i>
-
-                                                    <p>Create</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-
-                                    </ul>
-                                </li>
-                            @endcanany
-
-                            @canany(['Index Author', 'Create Author'])
-                                {{-- author --}}
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        {{-- <i class="fa-solid fa-building"></i> --}}
-                                        <i class="fa-regular fa-user-vneck-hair"></i>
-                                        <p>
-                                            Author
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        @can('Index Author')
-                                            <li class="nav-item">
-                                                <a href="{{ route('authors.index') }}" class="nav-link">
-                                                    <i class="fa-solid fa-list"></i>
-                                                    <p>Index</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-                                        @can('Create Author')
-                                            <li class="nav-item">
-                                                <a href="{{ route('authors.create') }}" class="nav-link">
-                                                    <i class="fa-solid fa-circle-plus"></i>
-                                                    <p>Create</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-
-                                    </ul>
-                                </li>
-                            @endcanany
-
-                            @canany(['Index Category', 'Create Category'])
-                                {{-- category --}}
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-
-                                        <i class="fa-solid fa-list-dropdown"></i>
-                                        <p>
-                                            Category
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        @can('Index Category')
-                                            <li class="nav-item">
-                                                <a href="{{ route('categories.index') }}" class="nav-link">
-                                                    <i class="fa-solid fa-list"></i>
-                                                    <p>Index</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-                                        @can('Create Category')
-                                            <li class="nav-item">
-                                                <a href="{{ route('categories.create') }}" class="nav-link">
-                                                    <i class="fa-solid fa-circle-plus"></i>
-                                                    <p>Create</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-                                    </ul>
-                                </li>
-                            @endcanany
-
-                            @canany(['Index Article', 'Create Article'])
-                                {{-- article --}}
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa-duotone fa-newspaper"></i>
-                                        <p>
-                                            Article
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        @can('Index Article')
-                                            <li class="nav-item">
-                                                <a href="{{ route('articles.index') }}" class="nav-link">
-                                                    <i class="fa-solid fa-list"></i>
-                                                    <p>Index</p>
-                                                </a>
-                                            </li>
-                                        @endcan
-
-                                        {{-- <li class="nav-item">
-                                    <a href="{{ route('articles.create') }}" class="nav-link">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                        <p>Create</p>
-                                    </a>
-                                </li> --}}
-
-                                    </ul>
-                                </li>
-                            @endcanany
-                        @endcanany
-
-
-
-                        <li class="nav-header">User Manegment</li>
-
-                        {{-- country --}}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-
-                                <i class="fa-solid fa-building"></i>
-                                <p>
-                                    Country
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                @can('Index Country')
-                                    <li class="nav-item">
-                                        <a href="{{ route('countries.index') }}" class="nav-link">
-                                            <i class="fa-solid fa-list"></i>
-                                            <p>Index</p>
-                                        </a>
-                                    </li>
-                                @endcan
-                                @can('Create Country')
-                                    <li class="nav-item">
-                                        <a href="{{ route('countries.create') }}" class="nav-link">
-                                            <i class="fa-solid fa-circle-plus"></i>
-                                            <p>Create</p>
-                                        </a>
-                                    </li>
-                                @endcan
-
-                            </ul>
-                        </li>
-
-
-                        @canany(['Index City', 'Create City'])
-                            {{-- city --}}
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    {{-- <i class="fa-solid fa-building"></i> --}}
-                                    {{-- <i class="fa-sharp fa-regular fa-city"></i> --}}
-                                    <i class="fa-thin fa-city"></i>
-                                    <p>
-                                        City
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @can('Index City')
-                                        <li class="nav-item">
-                                            <a href="{{ route('cities.index') }}" class="nav-link">
-                                                <i class="fa-solid fa-list"></i>
-                                                <p>Index</p>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                    @can('Create City')
-                                        <li class="nav-item">
-                                            <a href="{{ route('cities.create') }}" class="nav-link">
-                                                <i class="fa-solid fa-circle-plus"></i>
-                                                <p>Create</p>
-                                            </a>
-                                        </li>
-                                    @endcan
-
-                                </ul>
-                            </li>
-                        @endcanany
-                        {{-- Edit your profile --}}
-                        <li class="nav-header">Seeting</li>
+                        @elseif (Auth::guard('author')->id())
+                        @if (auth('author')->user()->images != '')
+                        <img src="{{ asset('storage/images/author/' . auth('author')->user()->images) }}"
+                            class="brand-image img-circle elevation-3" alt="User Image"
+                            style="width: 57px;height: 57px;">
+                        @else
+                        <img src="{{ asset('storage/images/admin/d.png') }}" class="brand-image img-circle elevation-3"
+                            alt="User Image">
+                        @endif
+                        @endif
+                        {{-- <img src="{{ asset('cms/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                            --}} <div class="info" style="display: flex;align-items: center;height: inherit;">
                         @if (Auth::guard('admin')->id())
-                            <li class="nav-item">
-                                {{-- <a href="{{ route('admins.edit') }}" class="nav-link"> --}}
-                                <a href="{{ url('cms/admins/{id()}/edit') }}" class="nav-link">
-                                    <i class="fa-solid fa-user-pen"></i>
-                                    <p>Edit your profile</p>
-                                </a>
-                            </li>
-                        @elseif (Auth::guard('auther')->id())
-                            <li class="nav-item">
-                                <a href="{{ route('authors.edit') }}" class="nav-link">
-                                    <i class="fa-solid fa-user-pen"></i>
-                                    <p>Edit your profile</p>
-                                </a>
-                            </li>
+                        <a href="#" class="d-block"> {{ auth('admin')->user()->full_name }}</a>
+                        @elseif (Auth::guard('author')->id())
+                        <a href="#" class="d-block"> {{ auth('author')->user()->full_name }}</a>
+                        @else
+                        <a href="#" class="d-block"> users</a>
                         @endif
-                        {{-- Change password --}}
-                        {{-- @if (Auth::guard('admin')->id())
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('cms.admin.edit-password') }}" class="nav-link">
-                                    <i class="fa-solid fa-unlock"></i>
-                                    <p>Change password</p>
+                                <a href="./index.html" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Dashboard v1</p>
                                 </a>
                             </li>
-                        @endif --}}
-                        <li class="nav-item">
-                            <a href="{{ route('view.logout') }}" class="nav-link">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                <p>Logout</p>
-                            </a>
-                        </li>
+                        </ul>
+                    </li>
 
-                    </ul>
-                </nav>
-                <!-- /.sidebar-menu -->
-            </div>
-            <!-- /.sidebar -->
-        </aside>
+                    {{-- Roles & Permission --}}
+                    @canany(['Index Role', 'Create Role', 'Index Permission', 'Create Permission'])
+                    <li class="nav-header">Roles & Permission</li>
+                    @canany(['Index Role', 'Create Role'])
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa-solid fa-user"></i>
+                            <p>
+                                Role
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Role')
+                            <li class="nav-item">
+                                <a href="{{ route('roles.index') }}" class="nav-link">
+                                    {{-- <i class="fas fa-angle-left right"></i> --}}
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Role')
+                            <li class="nav-item">
+                                <a href="{{ route('roles.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">@yield('main-title')</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">@yield('sub-title')</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
 
+                        </ul>
+                    </li>
+                    @endcanany
+                    @canany(['Index Permission', 'Create Permission'])
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            {{-- <i class="nav-icon far fa-solid fa-user-tie"></i> --}}
+                            {{-- <i class="fa-solid fa-user-tie"></i> --}}
+                            <i class="fa-solid fa-user"></i>
+                            <p>
+                                Permission
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Permission')
+                            <li class="nav-item">
+                                <a href="{{ route('permissions.index') }}" class="nav-link">
+                                    {{-- <i class="fas fa-angle-left right"></i> --}}
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Permission')
+                            <li class="nav-item">
+                                <a href="{{ route('permissions.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                    @endcanany
+                    @endcanany
+
+                    {{-- User Manegment --}}
+                    @canany(['Index Admin', 'Create Admin', 'Index Author', 'Create Author', 'Index Category',
+                    'Create Category', 'Index Article', 'Create Article'])
+                    <li class="nav-header">User Manegment</li>
+                    @canany(['Index Admin', 'Create Admin'])
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            {{-- <i class="nav-icon far fa-solid fa-user-tie"></i> --}}
+                            {{-- <i class="fa-solid fa-user-tie"></i> --}}
+                            <i class="fa-solid fa-user"></i>
+                            <p>
+                                Admin
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Admin')
+                            <li class="nav-item">
+                                <a href="{{ route('admins.index') }}" class="nav-link">
+                                    {{-- <i class="fas fa-angle-left right"></i> --}}
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                            @can('Create Admin')
+                            <li class="nav-item">
+                                <a href="{{ route('admins.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                    @endcanany
+
+                    @canany(['Index Author', 'Create Author'])
+                    {{-- author --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            {{-- <i class="fa-solid fa-building"></i> --}}
+                            <i class="fa-regular fa-user-vneck-hair"></i>
+                            <p>
+                                Author
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Author')
+                            <li class="nav-item">
+                                <a href="{{ route('authors.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Author')
+                            <li class="nav-item">
+                                <a href="{{ route('authors.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                    @endcanany
+                    @canany(['Index Viewer', 'Create Viewer'])
+                    {{-- author --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            {{-- <i class="fa-solid fa-building"></i> --}}
+                            <i class="fa-regular fa-user-vneck-hair"></i>
+                            <p>
+                                Viewer
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Viewer')
+                            <li class="nav-item">
+                                <a href="{{ route('viewers.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Viewer')
+                            <li class="nav-item">
+                                <a href="{{ route('viewers.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                    @endcanany
+
+                    @canany(['Index Category', 'Create Category'])
+                    {{-- category --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+
+                            <i class="fa-solid fa-list-dropdown"></i>
+                            <p>
+                                Category
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Category')
+                            <li class="nav-item">
+                                <a href="{{ route('categories.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Category')
+                            <li class="nav-item">
+                                <a href="{{ route('categories.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </li>
+                    @endcanany
+
+                    @canany(['Index Article', 'Create Article'])
+                    {{-- article --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa-duotone fa-newspaper"></i>
+                            <p>
+                                Article
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Article')
+                            <li class="nav-item">
+                                <a href="{{ route('articles.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Article')
+                            {{-- <li class="nav-item">
+                                <a href="{{ route('articles.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li> --}}
+
+                        </ul>
+                    </li>
+                    @endcan
+                    @endcanany
+
+                    @canany(['Index Slider', 'Create Slider'])
+                    {{-- article --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa-duotone fa-newspaper"></i>
+                            <p>
+                                Slider
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Slider')
+                            <li class="nav-item">
+                                <a href="{{ route('sliders.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Slider')
+                            <li class="nav-item">
+                                <a href="{{ route('sliders.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @endcan
+                    @endcanany
+                    @canany(['Index Contact'])
+                    {{-- article --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa-duotone fa-newspaper"></i>
+                            <p>
+                                Contact
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Slider')
+                            <li class="nav-item">
+                                <a href="{{ route('contacts.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endcan
+                    @endcanany
+                    @endcanany
+
+
+
+                    <li class="nav-header">User Manegment</li>
+
+                    {{-- country --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+
+                            <i class="fa-solid fa-building"></i>
+                            <p>
+                                Country
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index Country')
+                            <li class="nav-item">
+                                <a href="{{ route('countries.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create Country')
+                            <li class="nav-item">
+                                <a href="{{ route('countries.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+
+
+                    @canany(['Index City', 'Create City'])
+                    {{-- city --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            {{-- <i class="fa-solid fa-building"></i> --}}
+                            {{-- <i class="fa-sharp fa-regular fa-city"></i> --}}
+                            <i class="fa-thin fa-city"></i>
+                            <p>
+                                City
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Index City')
+                            <li class="nav-item">
+                                <a href="{{ route('cities.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-list"></i>
+                                    <p>Index</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('Create City')
+                            <li class="nav-item">
+                                <a href="{{ route('cities.create') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                    @endcanany
+                    {{-- Edit your profile --}}
+                    <li class="nav-header">Seeting</li>
+                    @if (Auth::guard('admin')->id())
+                    <li class="nav-item">
+                        <a href="{{ route('cms.auth.edit-profile') }}" class="nav-link">
+                            <i class="fa-solid fa-user-pen"></i>
+                            <p>Edit your profile</p>
+                        </a>
+                    </li>
+                    @elseif (Auth::guard('author')->id())
+                    <li class="nav-item">
+                        <a href="{{ route('authors.edit') }}" class="nav-link">
+                            <i class="fa-solid fa-user-pen"></i>
+                            <p>Edit your profile</p>
+                        </a>
+                    </li>
+                    @endif
+                    {{-- Change password --}}
+                    {{-- @if (Auth::guard('admin')->id())
+                    <li class="nav-item">
+                        <a href="{{ route('cms.admin.edit-password') }}" class="nav-link">
+                            <i class="fa-solid fa-unlock"></i>
+                            <p>Change password</p>
+                        </a>
+                    </li>
+                    @endif --}}
+                    <li class="nav-item">
+                        <a href="{{ route('view.logout') }}" class="nav-link">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+    </div>
+    </div>
+    <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
             <div class="container-fluid">
-                @yield('content')
-            </div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">@yield('main-title')</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item active">@yield('sub-title')</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; {{ now()->year }} - {{ now()->year + 1 }} {{ env('APP_NAME') }}</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> {{ env('APP_Version') }}
-            </div>
-        </footer>
+        <!-- /.content-header -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        <div class="container-fluid">
+            @yield('content')
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; {{ now()->year }} - {{ now()->year + 1 }} {{ env('APP_NAME') }}</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> {{ env('APP_Version') }}
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -669,7 +750,7 @@
     {{-- Axios --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    {{-- Sweet Aleart  --}}
+    {{-- Sweet Aleart --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- crud --}}
     <script src="{{ asset('js/crud.js') }}"></script>
