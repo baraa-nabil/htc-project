@@ -1,6 +1,6 @@
 <?php
-// use App\Models\Category;
-// $categories = Category::where('status','active')->orderBy('updated_at','desc')->get();
+use App\Models\Category;
+$categories = Category::where('status','active')->orderBy('updated_at','desc')->get();
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
 
     <title>News | @yield('title')</title>
 
@@ -28,7 +29,7 @@
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">news</a>
+            <a class="navbar-brand" href="{{ route('homeWeb') }}">news</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -46,7 +47,7 @@
                     @endforeach
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                     </li>
 
                 </ul>

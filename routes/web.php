@@ -126,4 +126,6 @@ Route::prefix('news/')->group(function () {
     Route::get('index', [HomeController::class, 'home'])->name('homeWeb');
     Route::get('all/{id}', [HomeController::class, 'all'])->name('all');
     Route::get('det/{id}', [HomeController::class, 'det'])->name('det');
+    Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+    Route::post('contact', [HomeController::class, 'storContact']);
 });

@@ -17,4 +17,9 @@ class City extends Model
     {
         return $this->hasMany(User::class);
     }
+    // for api
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

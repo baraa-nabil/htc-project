@@ -87,7 +87,7 @@
 @section('scripts')
 
 <script>
-    function آperformDestroy(id, reference) {
+    function performDestroy(id, reference) {
             confirmDestroy('/cms/admin/sliders/' + id, reference)
         }
 </script>
